@@ -1,16 +1,24 @@
-# song_snatcher
+# track_catcher
 
-A new Flutter project.
+Download songs by just sharing the link from Shazam
 
-## Getting Started
+### Features
 
-This project is a starting point for a Flutter application.
+- Share a song metadata from an app like Shazam
+- [ ] Connect with an API to give option to download
 
-A few resources to get you started if this is your first Flutter project:
+### Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    Flutter
+    flutter_downloader: ^1.11.8
+    share_plus: ^10.0.0
+    path_provider: ^2.1.4
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Setup Instructions
+
+
+
+### App Demo GIF
+
+
+### License
