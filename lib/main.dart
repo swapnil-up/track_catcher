@@ -48,11 +48,79 @@ class _ShareReceiverState extends State<ShareReceiver> {
     }
   }
 
+  Map<String, String> parseSharedData(String data) {
+    final parts = data.split(' by ');
+
+    if (parts.length < 2) {
+      return {'title': 'Unknown', 'artist': 'Unknown', 'link': 'Unknown'};
+    }
+
+    final title = parts[0].trim();
+    final remainingParts = parts[1].split(' ');
+
+    String artist = '';
+    String link = 'Unknown';
+
+    for (var part in remainingParts) {
+      if (part.startsWith('https://')) {
+        link = part.trim();
+        break;
+      } else {
+        artist += (artist == 'Unknown' ? '' : ' ') + part.trim();
+      }
+    }
+
+    return {
+      'title': title,
+      'artist': artist,
+      'link': link,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+    final songData = parseSharedData(sharedText);
     return Scaffold(
       appBar: AppBar(title: Text("Track Catcher")),
-      body: Center(child: Text(sharedText)),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Title:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SelectableText(
+              songData['title'] ?? 'N/A',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Artist:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SelectableText(
+              songData['artist'] ?? 'N/A',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Link:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            GestureDetector(
+              onTap: () {
+                // Open the link (optional step for later)
+              },
+              child: Text(
+                songData['link'] ?? 'N/A',
+                style: TextStyle(fontSize: 16, color: Colors.blue),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
